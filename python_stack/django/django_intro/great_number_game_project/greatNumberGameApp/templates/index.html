@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		{% load static %}
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{% static 'greatNumberGameApp/style.css' %}"/>
+		<title>Great Number Game</title>
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>Welcome To The Great Number Game!</h1>
+			<p>I am thinking of a number between 1 and 100</p>
+			<p>Take a guess!</p>
+
+			{% if request.session.guess %} {% if request.session.guess >
+			request.session.rNumber and request.session.guessCount < 5 %}
+			<div class="results high">
+				<h2>Too High!</h2>
+			</div>
+			{% endif %} {% if request.session.guess < request.session.rNumber and
+			request.session.guessCount < 5 %}
+			<div class="results low">
+				<h2>Too Low!</h2>
+			</div>
+			{% endif %} {% if request.session.guess == request.session.rNumber %}
+			<div class="results win">
+				<h2>{{ request.session.rNumber }} was the number!</h2>
+				<form class="reset" action="/playAgain" method="GET">
+					<button type="submit"> Play again! </button>
+				</form>
+			</div>
+			{% endif %} {% if request.session.guessCount >= 5 %}
+			<div class="results lose">
+				<h2>You Lose!</h2>
+				<form class="reset" action="/playAgain" method="GET">
+					<button type="submit"> Play again! </button>
+				</form>
+			</div>
+			{% endif %}
+
+			<div class="total">Guess Count: {{ request.session.guessCount }}</div>
+			<form class="reset" action="/playAgain" method="GET">
+				<button type="submit"> RESET </button>
+			</form>
+
+			{% endif %}
+			<form class="guessForm" action="/guess" method="post">
+				{% csrf_token %}
+				<input type="text" name="guess" /><br />
+				<button type="submit">SUBMIT</button>
+			</form>
+		</div>
+	</body>
+</html>

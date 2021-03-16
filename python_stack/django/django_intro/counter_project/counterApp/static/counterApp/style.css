@@ -1,0 +1,18 @@
+h1 {
+    text-decoration: underline;
+}
+
+.reset {
+    color: white;
+    background-color: darkred;
+}
+
+.addTwo {
+    color: white;
+    background-color: black;
+}
+
+.add {
+    color: white;
+    background-color: green;
+}
