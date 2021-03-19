@@ -1,0 +1,16 @@
+hr {
+	border-style: solid;
+	color: black;
+    margin: 100px;
+    padding: 2px;
+    align-self: center;
+    opacity: 1;
+}
+
+.allDojos {
+    text-align: center;
+}
+
+ul {
+    list-style: inside;
+}
